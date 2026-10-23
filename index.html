@@ -208,6 +208,17 @@
     background:linear-gradient(135deg,var(--accent),var(--accent2));
     color:#fff;border:none;
   }
+  /* App 内只剩「顶部」一个键，做成右下悬浮胶囊 */
+  html.in-app .bottombar{
+    background:transparent;border-top:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+    justify-content:flex-end;padding:0 16px calc(16px + env(safe-area-inset-bottom));
+    pointer-events:none;
+  }
+  html.in-app .bottombar a{
+    flex:0 0 auto;width:auto;padding:11px 20px;border-radius:99px;
+    box-shadow:0 6px 20px rgba(0,0,0,.45);pointer-events:auto;
+  }
+  html.in-app body{padding-bottom:calc(20px + env(safe-area-inset-bottom))}
 </style>
 </head>
 <body>
@@ -619,7 +630,7 @@
 </section>
 
 <footer>
-  整理于 <span id="verDate">2026-10-23</span> · 供发电 2408 班备赛参考<br>
+  整理于 <span id="verDate">2026-10-23</span> · 供发电 2408 班备赛参考 · <span style="color:#7c9dff">内容持续更新</span><br>
   视频链接均为公开页面，若失效可在 B 站按 BV 号或标题搜索<br>
   <span style="opacity:.6">本页可离线查看 · 视频需联网</span>
 </footer>
