@@ -665,9 +665,10 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 1800);
   }
-  // App 内打开时隐藏下载入口（优先靠 html.in-app 类，兼容 ?app=1 直连调试）
-  if (/[?&]app=1/.test(location.search) || document.documentElement.classList.contains('in-app')) {
+  // App 内打开时隐藏下载入口：App 从 file:// 加载本地内容，网页版是 http(s)
+  if (location.protocol === 'file:' || /[?&]app=1/.test(location.search)) {
     document.documentElement.classList.add('in-app');
+    document.documentElement.classList.add('in-app-now');
     var dl = document.querySelector('.dl');
     var tip = document.querySelector('.dl-tip');
     var dlB = document.getElementById('dlBottom');
