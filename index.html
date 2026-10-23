@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>职规赛备赛资料</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  :root{
+    --bg:#0b1020; --bg2:#111a33; --card:#151f3b; --card2:#1b2748;
+    --line:rgba(255,255,255,.09); --tx:#eef2ff; --tx2:#9aa8c7; --tx3:#6b7a9c;
+    --accent:#4d8dff; --accent2:#7c5cff; --gold:#ffc845; --green:#35d08a; --red:#ff6b6b;
+  }
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--tx);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;
+    line-height:1.62; -webkit-font-smoothing:antialiased;
+    padding-bottom:calc(78px + env(safe-area-inset-bottom));
+    overflow-x:hidden;
+  }
+  /* ---------- header ---------- */
+  header{
+    padding:calc(26px + env(safe-area-inset-top)) 18px 20px;
+    background:
+      radial-gradient(120% 100% at 0% 0%, rgba(77,141,255,.30) 0%, transparent 55%),
+      radial-gradient(100% 90% at 100% 0%, rgba(124,92,255,.26) 0%, transparent 55%),
+      linear-gradient(180deg,#0e1730 0%, var(--bg) 100%);
+    border-bottom:1px solid var(--line);
+  }
+  header h1{margin:0 0 6px;font-size:23px;letter-spacing:.4px;font-weight:800}
+  header .sub{color:var(--tx2);font-size:13.5px;margin:0}
+  header .stats{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+  .stat{
+    background:rgba(255,255,255,.055);border:1px solid var(--line);
+    border-radius:10px;padding:6px 11px;font-size:12px;color:var(--tx2);
+  }
+  .stat b{color:var(--tx);font-weight:700;font-size:13px}
+  /* ---------- download banner ---------- */
+  .dl{
+    display:flex;align-items:center;gap:12px;margin-top:16px;
+    padding:13px 15px;border-radius:14px;text-decoration:none;
+    background:linear-gradient(120deg,rgba(53,208,138,.20),rgba(77,141,255,.20));
+    border:1px solid rgba(53,208,138,.35);
+    transition:transform .12s;
+  }
+  .dl:active{transform:scale(.98)}
+  .dl-ic{
+    width:36px;height:36px;flex:0 0 36px;border-radius:11px;
+    background:rgba(53,208,138,.22);color:var(--green);
+    display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;
+  }
+  .dl-tx{flex:1;display:flex;flex-direction:column;gap:2px}
+  .dl-tx b{font-size:14.5px;color:var(--tx);font-weight:700}
+  .dl-tx small{font-size:11.5px;color:var(--tx2)}
+  .dl-arrow{color:var(--green);font-size:22px;font-weight:700;opacity:.8}
+  .dl-tip{margin:8px 0 0;font-size:11px;color:var(--tx3);line-height:1.5}
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,16,32,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;white-space:nowrap;scrollbar-width:none;
+    padding:10px 14px;
+  }
+  nav::-webkit-scrollbar{display:none}
+  nav a{
+    display:inline-block;padding:7px 14px;margin-right:7px;border-radius:99px;
+    background:rgba(255,255,255,.06);color:var(--tx2);text-decoration:none;
+    font-size:13px;transition:.18s;
+  }
+  nav a:active{background:var(--accent);color:#fff}
+  /* ---------- sections ---------- */
+  main{padding:6px 14px 30px;max-width:760px;margin:0 auto}
+  section{padding-top:26px;scroll-margin-top:64px}
+  .sec-h{display:flex;align-items:baseline;gap:9px;margin:0 0 4px}
+  .sec-h .ic{font-size:17px;line-height:1}
+  .sec-h h2{margin:0;font-size:17.5px;font-weight:750;letter-spacing:.2px}
+  .sec-desc{margin:0 0 14px;color:var(--tx3);font-size:12.5px;line-height:1.55}
+  /* ---------- cards ---------- */
+  .card{
+    background:linear-gradient(180deg,var(--card) 0%,var(--card2) 100%);
+    border:1px solid var(--line);border-radius:15px;
+    padding:14px 14px 13px;margin-bottom:11px;
+    position:relative;overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:linear-gradient(180deg,var(--accent),var(--accent2));
+  }
+  .card.hot::before{background:linear-gradient(180deg,var(--gold),#ff8a3d)}
+  .card.power::before{background:linear-gradient(180deg,var(--green),#1f9bd1)}
+  .card.voc::before{background:linear-gradient(180deg,#ff8fab,#c77dff)}
+  .card-top{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-bottom:7px}
+  .tag{
+    font-size:10.5px;padding:2.5px 8px;border-radius:6px;font-weight:650;letter-spacing:.3px;
+    background:rgba(77,141,255,.16);color:#8fbaff;border:1px solid rgba(77,141,255,.25);
+  }
+  .tag.gold{background:rgba(255,200,69,.14);color:var(--gold);border-color:rgba(255,200,69,.28)}
+  .tag.green{background:rgba(53,208,138,.14);color:var(--green);border-color:rgba(53,208,138,.26)}
+  .tag.purple{background:rgba(199,125,255,.14);color:#d9a6ff;border-color:rgba(199,125,255,.26)}
+  .tag.dim{background:rgba(255,255,255,.05);color:var(--tx3);border-color:var(--line)}
+  .card h3{margin:0 0 6px;font-size:15.5px;font-weight:700;line-height:1.42}
+  .card p{margin:0 0 11px;color:var(--tx2);font-size:13px;line-height:1.6}
+  .card p.why{color:var(--tx3);font-size:12.5px}
+  .card p.why b{color:#a9c4ff;font-weight:600}
+  .meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--tx3);font-size:11.5px;margin-bottom:12px}
+  .meta span{display:flex;align-items:center;gap:4px}
+  /* ---------- buttons ---------- */
+  .acts{display:flex;gap:8px}
+  .btn{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+    padding:11px 10px;border-radius:10px;text-decoration:none;font-size:13.5px;font-weight:650;
+    background:rgba(77,141,255,.16);color:#a9c4ff;border:1px solid rgba(77,141,255,.3);
+    transition:transform .12s,background .18s;
+  }
+  .btn:active{transform:scale(.97);background:rgba(77,141,255,.3)}
+  .btn.copy{
+    flex:0 0 92px;background:rgba(255,255,255,.055);color:var(--tx2);
+    border-color:var(--line);font-weight:600;
+  }
+  .btn.copy:active{background:rgba(255,255,255,.12)}
+  .btn.done{color:var(--green);border-color:rgba(53,208,138,.4);background:rgba(53,208,138,.12)}
+  /* ---------- text blocks ---------- */
+  .panel{
+    background:linear-gradient(180deg,var(--card) 0%,var(--card2) 100%);
+    border:1px solid var(--line);border-radius:15px;padding:15px 15px 5px;margin-bottom:11px;
+  }
+  .panel h3{margin:0 0 9px;font-size:15px;font-weight:700}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:0 0 10px}
+  .steps li{
+    counter-increment:s;position:relative;padding:0 0 13px 34px;
+    font-size:13.2px;color:var(--tx2);line-height:1.62;
+  }
+  .steps li::before{
+    content:counter(s);position:absolute;left:0;top:1px;
+    width:22px;height:22px;border-radius:7px;
+    background:rgba(77,141,255,.16);color:#8fbaff;
+    font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(77,141,255,.28);
+  }
+  .steps li b{color:var(--tx);font-weight:650}
+  .steps li:last-child{padding-bottom:9px}
+  .warn li::before{background:rgba(255,107,107,.14);color:#ff9494;border-color:rgba(255,107,107,.28)}
+  .note{
+    font-size:12px;color:var(--tx3);background:rgba(255,255,255,.035);
+    border-left:2px solid rgba(77,141,255,.5);border-radius:0 8px 8px 0;
+    padding:9px 12px;margin:0 0 12px;line-height:1.6;
+  }
+  .note b{color:#a9c4ff}
+  /* ---------- bottom bar ---------- */
+  .bottombar{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    display:flex;gap:9px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(11,16,32,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-top:1px solid var(--line);
+  }
+  .bottombar a,.bottombar button{
+    flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+    padding:11px;border-radius:11px;border:1px solid var(--line);
+    background:rgba(255,255,255,.06);color:var(--tx2);
+    font-size:13px;font-weight:650;text-decoration:none;font-family:inherit;
+  }
+  .bottombar .primary{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;
+  }
+  footer{
+    text-align:center;color:var(--tx3);font-size:11.5px;
+    padding:24px 16px 8px;line-height:1.7;
+  }
+  .toast{
+    position:fixed;left:50%;bottom:96px;transform:translate(-50%,18px);
+    background:#eef2ff;color:#0b1020;padding:10px 18px;border-radius:11px;
+    font-size:13px;font-weight:650;opacity:0;pointer-events:none;
+    transition:.25s;z-index:99;box-shadow:0 8px 30px rgba(0,0,0,.45);
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>职规赛备赛资料</h1>
+  <p class="sub">全国大学生职业规划大赛 · 往届优秀作品参考</p>
+  <div class="stats">
+    <div class="stat"><b>18</b> 个现场案例</div>
+    <div class="stat"><b>6</b> 场完整国赛</div>
+    <div class="stat"><b>1</b> 份报告骨架</div>
+  </div>
+  <a class="dl" href="zgs-guide.apk" download>
+    <span class="dl-ic">⬇</span>
+    <span class="dl-tx"><b>下载安卓 App</b><small>离线可用 · 208 KB</small></span>
+    <span class="dl-arrow">›</span>
+  </a>
+  <p class="dl-tip">手机上装好后可脱离网络看全部内容；视频仍需联网跳转 B 站。</p>
+</header>
+
+<nav>
+  <a href="#s1">🔥 先看这个</a>
+  <a href="#s2">🏆 国金单场</a>
+  <a href="#s3">💼 就业赛道</a>
+  <a href="#s4">⚡ 电力能源</a>
+  <a href="#s5">🎓 职教专科</a>
+  <a href="#s6">📚 备赛方法</a>
+  <a href="#s7">📝 报告骨架</a>
+  <a href="#s8">⚠️ 避坑</a>
+  <a href="#s9">🗓️ 三周计划</a>
+</nav>
+
+<main>
+
+<section id="s1">
+  <div class="sec-h"><span class="ic">🔥</span><h2>先看这个：完整国赛现场</h2></div>
+  <p class="sec-desc">整届总决赛的全程录像，几十个不同专业选手的完整陈述和评委提问。性价比最高。</p>
+
+  <div class="card hot">
+    <div class="card-top"><span class="tag gold">最新</span><span class="tag dim">全程</span></div>
+    <h3>第四届全国大学生职业规划大赛（持续更新中）</h3>
+    <p class="why"><b>为什么先看：</b>最新一届，赛制和评分口径最贴近你要参加的这一届。UP 主在持续更新各省赛、国赛。</p>
+    <div class="meta"><span>⏱ 130:52</span><span>🎬 石头FM</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1JBp16WE7v" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1JBp16WE7v">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card hot">
+    <div class="card-top"><span class="tag gold">国赛</span><span class="tag dim">2026.9</span></div>
+    <h3>第三届全国总决赛 · 风采展示</h3>
+    <p class="why"><b>看点：</b>完整一场总决赛，能看到各赛道选手的临场状态、评委追问的节奏。</p>
+    <div class="meta"><span>⏱ 89:52</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1eDbT6pETR" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1eDbT6pETR">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card hot">
+    <div class="card-top"><span class="tag gold">国赛</span><span class="tag dim">2025.4</span></div>
+    <h3>第二届全国总决赛 · 风采展示</h3>
+    <p class="why"><b>看点：</b>这一届在湖南中南大学办，含专场招聘会和供需对接会，能看到企业评委怎么问。</p>
+    <div class="meta"><span>⏱ 89:59</span><span>👁 4.3万</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1zf1VBJE3U" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1zf1VBJE3U">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>怎么看才不浪费时间：</b>别从头看到尾。挑 3—4 个和你专业相近的选手，只看「主题陈述 + 评委提问」两段。边看边记三件事：①他第一句怎么定义职业目标；②他用哪几个数字/证书/实习证明自己；③评委问了什么、他怎么接。
+  </div>
+</section>
+
+<section id="s2">
+  <div class="sec-h"><span class="ic">🏆</span><h2>国金单场路演</h2></div>
+  <p class="sec-desc">单场完整路演，适合反复拆结构。</p>
+
+  <div class="card">
+    <div class="card-top"><span class="tag gold">国金</span><span class="tag dim">成长赛道</span><span class="tag dim">高教组</span></div>
+    <h3>信号处理技术专家 · 北京邮电大学</h3>
+    <p class="why"><b>这是标杆：</b>播放量最高（11.7万），工科目标岗位的范式。逻辑链最干净——目标怎么来、证据怎么摆、路径怎么接，一气呵成。全班都应该看一遍。</p>
+    <div class="meta"><span>⏱ 11:32</span><span>👁 11.7万</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1MZJSzxE9Z" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1MZJSzxE9Z">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag gold">金奖</span><span class="tag dim">成长赛道</span></div>
+    <h3>新农科创业者</h3>
+    <p class="why"><b>看点：</b>非技术岗怎么写「情怀 + 落地」。情怀讲过头容易空，这个案例的分寸感值得学。</p>
+    <div class="meta"><span>⏱ 8:14</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1LiBXYCEit" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1LiBXYCEit">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag gold">金奖</span><span class="tag dim">含字幕</span></div>
+    <h3>革命老区光荣院护士（路演 + 答辩）</h3>
+    <p class="why"><b>唯一带字幕的一份：</b>能逐字拆解话术、停顿和转场。想学「怎么说」就看这个。</p>
+    <div class="meta"><span>⏱ 9:01</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1ce411r7eK" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1ce411r7eK">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag">省金</span><span class="tag dim">2 分钟速看</span></div>
+    <h3>第三届贵州省赛 · 成长赛道金奖</h3>
+    <p class="why"><b>看点：</b>很短，适合碎片时间快速过一遍结构。</p>
+    <div class="meta"><span>⏱ 2:47</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1NFtE6PEq8" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1NFtE6PEq8">复制BV号</button>
+    </div>
+  </div>
+</section>
+
+<section id="s3">
+  <div class="sec-h"><span class="ic">💼</span><h2>就业赛道（毕业年级对口）</h2></div>
+  <p class="sec-desc">如果班上是毕业年级，重点看这批。评分重心是简历、岗位匹配度、面试应变。</p>
+
+  <div class="card">
+    <div class="card-top"><span class="tag">第一名</span><span class="tag dim">就业赛道</span></div>
+    <h3>湖南省首届 · 基层护士</h3>
+    <p class="why"><b>看点：</b>就业赛道第一名的完整陈述，节奏感极好——不铺垫、直接上岗位理解，每句话都在证明匹配度。</p>
+    <div class="meta"><span>⏱ 6:57</span><span>👁 3.4万</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV11qBkYwE3w" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV11qBkYwE3w">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag dim">就业赛道</span><span class="tag dim">公共服务分赛区</span></div>
+    <h3>主题陈述环节</h3>
+    <p class="why"><b>看点：</b>分赛区真实比赛录像，比国赛更接近省赛/校赛的实际情况。</p>
+    <div class="meta"><span>⏱ 6:26</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1ic41167Gy" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1ic41167Gy">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag dim">就业赛道</span></div>
+    <h3>急诊护士</h3>
+    <p class="why"><b>看点：</b>时长较长（16 分钟），能完整看到答辩环节的追问深度。</p>
+    <div class="meta"><span>⏱ 16:14</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1c2SeB9EtZ" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1c2SeB9EtZ">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag dim">方法论</span></div>
+    <h3>就业赛道辅助材料范本</h3>
+    <p class="why"><b>看点：</b>讲辅助材料（简历、证明、作品）到底该怎么准备，3 分半讲清楚。</p>
+    <div class="meta"><span>⏱ 3:41</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1i94y1J7DC" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1i94y1J7DC">复制BV号</button>
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="sec-h"><span class="ic">⚡</span><h2>电力 / 能源方向</h2></div>
+  <p class="sec-desc">这类作品公开渠道很少。以下是最接近的，岗位能力模型可以直接借用。</p>
+
+  <div class="card power">
+    <div class="card-top"><span class="tag green">最贴近</span><span class="tag dim">就业赛道</span></div>
+    <h3>电气工程师</h3>
+    <p class="why"><b>重点看这个：</b>和发电专业最贴。岗位能力模型（专业技能、证书、实操、安全意识）基本能直接换成发电侧的要求。</p>
+    <div class="meta"><span>⏱ 10:59</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1de25BEESp" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1de25BEESp">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card power">
+    <div class="card-top"><span class="tag green">新能源</span><span class="tag dim">成长赛道</span></div>
+    <h3>新能源汽车工程师</h3>
+    <p class="why"><b>看点：</b>新能源方向的目标职业怎么写，行业趋势数据怎么用。</p>
+    <div class="meta"><span>⏱ 13:15</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1r1SFBxEAf" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1r1SFBxEAf">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card power">
+    <div class="card-top"><span class="tag green">校赛</span><span class="tag dim">新能源</span></div>
+    <h3>新能源高级维修技师（商丘师院校赛）</h3>
+    <p class="why"><b>看点：</b>校赛水平的真实样本，能看出「及格线」在哪。对着这个判断自己的稿子够不够。</p>
+    <div class="meta"><span>⏱ 12:48</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1KW1GBsEG8" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1KW1GBsEG8">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card power">
+    <div class="card-top"><span class="tag green">工科通用</span><span class="tag dim">北京市决赛</span></div>
+    <h3>机电工程师</h3>
+    <p class="why"><b>看点：</b>工科通用范式，北京市决赛水平。</p>
+    <div class="meta"><span>⏱ 14:13</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1CjnBzmEiW" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1CjnBzmEiW">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card power">
+    <div class="card-top"><span class="tag green">工科通用</span></div>
+    <h3>机械工程师</h3>
+    <div class="meta"><span>⏱ 8:48</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1QbyjBCESU" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1QbyjBCESU">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>坦白说：</b>纯粹的「发电厂集控运行值班员」「电厂电气值班员」这类目标岗位作品，公开渠道确实没搜到。备赛时对标电气工程师的写法，把岗位能力要求替换成发电侧的真实内容——<b>集控运行、设备巡检、倒闸操作、机组启停、事故处理</b>。
+  </div>
+</section>
+
+<section id="s5">
+  <div class="sec-h"><span class="ic">🎓</span><h2>职教组 / 专科组</h2></div>
+  <p class="sec-desc">如果是高职院校，重点看这批。评分口径和高教组差别挺大。</p>
+
+  <div class="card voc">
+    <div class="card-top"><span class="tag purple">职教金奖</span><span class="tag dim">四川</span></div>
+    <h3>轨道交通</h3>
+    <p class="why"><b>看点：</b>职教组金奖，5 分钟精炼版。能看到职教组怎么把技能证书和实训经历讲成主线。</p>
+    <div class="meta"><span>⏱ 5:20</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1iH6PY1EdT" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1iH6PY1EdT">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card voc">
+    <div class="card-top"><span class="tag purple">专科组</span><span class="tag dim">整场</span></div>
+    <h3>江苏省第十七届大学生职业规划大赛（专科组）</h3>
+    <p class="why"><b>看点：</b>整场录像 96 分钟，省教育厅主办，能看到十几个选手横向对比。</p>
+    <div class="meta"><span>⏱ 96:07</span><span>👁 1.3万</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV12w411s7C7" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV12w411s7C7">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card voc">
+    <div class="card-top"><span class="tag purple">专科组</span><span class="tag dim">整场</span></div>
+    <h3>江苏省第十六届大学生职业规划大赛（专科组）</h3>
+    <div class="meta"><span>⏱ 128:43</span><span>👁 6807</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1Pc411r7dr" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1Pc411r7dr">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>关键差异：</b>职教组评分明显更看重<b>技能证书、实训经历、企业实习</b>。理论模型讲太多反而扣分——这是和高教组最大的不同。
+  </div>
+</section>
+
+<section id="s6">
+  <div class="sec-h"><span class="ic">📚</span><h2>备赛方法课（免费）</h2></div>
+  <p class="sec-desc">系统讲怎么准备的。注意：这些 UP 主多是培训机构，视频免费但会引导买课——只看免费内容就够。</p>
+
+  <div class="card">
+    <div class="card-top"><span class="tag dim">最全</span></div>
+    <h3>成长赛道备赛全流程（全网最全版）</h3>
+    <div class="meta"><span>⏱ 66:56</span><span>👁 5.8万</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1PF1FBpErK" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1PF1FBpErK">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag dim">全流程</span></div>
+    <h3>国奖备赛全流程</h3>
+    <div class="meta"><span>⏱ 56:14</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1kyJ966E9Y" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1kyJ966E9Y">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag dim">写作</span></div>
+    <h3>手把手教你写生涯发展报告</h3>
+    <div class="meta"><span>⏱ 17:02</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1w3qDBBEQz" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1w3qDBBEQz">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag gold">很关键</span><span class="tag dim">4分钟</span></div>
+    <h3>生涯发展报告与展示的区别</h3>
+    <p class="why"><b>必须先看：</b>很多人搞混这两份材料，写成一样的内容，直接被扣分。4 分半讲清楚。</p>
+    <div class="meta"><span>⏱ 4:48</span><span>👁 1.3万</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1LgmaYVE9B" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1LgmaYVE9B">复制BV号</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top"><span class="tag dim">答辩</span></div>
+    <h3>成长赛道与就业赛道答辩问题汇总</h3>
+    <div class="meta"><span>⏱ 1:45</span></div>
+    <div class="acts">
+      <a class="btn" href="https://www.bilibili.com/video/BV1CN411376W" target="_blank" rel="noopener">▶ 打开视频</a>
+      <button class="btn copy" data-bv="BV1CN411376W">复制BV号</button>
+    </div>
+  </div>
+</section>
+
+<section id="s7">
+  <div class="sec-h"><span class="ic">📝</span><h2>生涯发展报告骨架</h2></div>
+  <p class="sec-desc">从 53 篇获奖范文里提炼出来的，结构高度统一，五段式。</p>
+
+  <div class="panel">
+    <h3>五段式结构</h3>
+    <ol class="steps">
+      <li><b>自我认知</b><br>兴趣、能力、性格、价值观。附 MBTI / 霍兰德结果，再加「他人评价」——父母、老师、同学各一条。比自说自话可信得多。</li>
+      <li><b>职业认知</b><br>行业环境 + 岗位能力要求。必须有<b>具体数据</b>：行业人才缺口、招聘岗位数、薪资区间、目标企业招聘要求原文。</li>
+      <li><b>职业定位</b><br>SWOT 矩阵收口到<b>一个明确的目标岗位</b>，并给出 2—3 条发展路径。</li>
+      <li><b>行动计划</b><br>分「在校期间 / 毕业 1—3 年 / 3—5 年」三段。每段 5—7 条可验证任务：考证名称、时间节点、实习单位。</li>
+      <li><b>评估调整</b><br>预设 2 条备选路径（如专升本、转岗），体现风险意识。</li>
+    </ol>
+  </div>
+
+  <div class="panel">
+    <h3>发电方向的目标岗位怎么写</h3>
+    <p style="font-size:13.2px;color:var(--tx2);margin:0 0 12px">
+      不要写「电力行业高级工程师」这种空话。要收敛到具体岗位 + 具体企业，比如：<br>
+      <span style="color:#a9c4ff">集控运行值班员 · 某发电厂 · 300MW 机组</span>
+    </p>
+    <p style="font-size:13.2px;color:var(--tx2);margin:0 0 12px">
+      对应能力项可以直接从这几个方向找证据：
+    </p>
+    <ol class="steps">
+      <li><b>集控运行</b> —— DCS 系统操作、参数监视、机组启停流程</li>
+      <li><b>设备巡检</b> —— 汽轮机、锅炉、发电机本体及辅机的巡检要点</li>
+      <li><b>电气操作</b> —— 倒闸操作、停送电、工作票与操作票</li>
+      <li><b>事故处理</b> —— 常见故障判断、应急预案、事故演练记录</li>
+      <li><b>证书</b> —— 电工证、特种作业操作证、仿真机培训证书</li>
+    </ol>
+  </div>
+</section>
+
+<section id="s8">
+  <div class="sec-h"><span class="ic">⚠️</span><h2>评委最反感的三件事</h2></div>
+  <p class="sec-desc">从录像和高低分对比里反复出现的雷区。</p>
+
+  <div class="panel">
+    <ol class="steps warn">
+      <li><b>目标是空话</b><br>「成为电力行业的高级工程师」——没有具体岗位、没有具体企业。评委第一个问题就会问死你。</li>
+      <li><b>证书奖项堆一屏</b><br>但和目标岗位没关系。堆得越多越显得没想清楚。相关性 &gt; 数量。</li>
+      <li><b>生涯发展报告 = PPT 文字版</b><br>两份材料内容完全重复。报告讲「为什么这么规划」，展示讲「我凭什么能做到」，是两件事。</li>
+    </ol>
+  </div>
+</section>
+
+<section id="s9">
+  <div class="sec-h"><span class="ic">🗓️</span><h2>三周推进计划</h2></div>
+  <p class="sec-desc">核心原则：先定岗位，再写报告。顺序反了一定写成空话。</p>
+
+  <div class="panel">
+    <h3>第一周 · 建立判断力</h3>
+    <ol class="steps">
+      <li>全班看两个视频：<b>第二届国金·信号处理技术专家</b>（11 分）+ <b>就业赛道·电气工程师</b>（11 分）</li>
+      <li>每人写 300 字观后感，重点写「他哪句话让我信了」</li>
+    </ol>
+  </div>
+
+  <div class="panel">
+    <h3>第二周 · 定岗位</h3>
+    <ol class="steps">
+      <li>每人交一页纸：目标岗位名称 + 目标企业 3 家 + 岗位要求原文截图 + 自己目前差在哪</li>
+      <li>班里互评，把「电力行业」这种大词全部打回去重写</li>
+    </ol>
+  </div>
+
+  <div class="panel">
+    <h3>第三周 · 写材料</h3>
+    <ol class="steps">
+      <li>才开始写生涯发展报告，按五段式</li>
+      <li>报告定稿后再做 PPT，明确两者的分工</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  整理于 2026-10-23 · 供发电 2408 班备赛参考<br>
+  视频链接均为公开页面，若失效可在 B 站按 BV 号或标题搜索<br>
+  <span style="opacity:.6">本页可离线查看 · 视频需联网</span>
+</footer>
+
+</main>
+
+<div class="bottombar">
+  <a href="#s1" id="topBtn">↑ 顶部</a>
+  <a href="zgs-guide.apk" download class="primary" id="dlBottom">⬇ 下载 App</a>
+  <a href="职业规划大赛_往届优秀作品参考清单.md" download id="mdBottom">📄 MD</a>
+</div>
+
+<div class="toast" id="toast">已复制</div>
+
+<script>
+  // 复制 BV 号
+  document.querySelectorAll('.btn.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var bv = btn.dataset.bv;
+      var done = function(){
+        var old = btn.textContent;
+        btn.textContent = '✓ 已复制';
+        btn.classList.add('done');
+        showToast('BV 号已复制：' + bv);
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(bv).then(done).catch(function(){ fallback(bv, done); });
+      } else { fallback(bv, done); }
+    });
+  });
+  function fallback(text, cb){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); cb(); } catch(e){ showToast('复制失败，请手动选中：'+text); }
+    document.body.removeChild(ta);
+  }
+  var toastTimer;
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 1800);
+  }
+  // App 内打开时（?app=1）隐藏下载入口，避免自己下载自己
+  if (/[?&]app=1/.test(location.search)) {
+    var dl = document.querySelector('.dl');
+    var tip = document.querySelector('.dl-tip');
+    var dlB = document.getElementById('dlBottom');
+    var mdB = document.getElementById('mdBottom');
+    if (dl) dl.remove();
+    if (tip) tip.remove();
+    if (dlB) dlB.remove();
+    if (mdB) mdB.remove();
+    var topB = document.getElementById('topBtn');
+    if (topB) topB.classList.add('primary');
+  }
+
+  // 注册 service worker（仅 http/https 下有效，file:// 打开时静默跳过）
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('sw.js').catch(function(){});
+    });
+  }
+</script>
+</body>
+</html>
