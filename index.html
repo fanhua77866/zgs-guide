@@ -180,6 +180,34 @@
     transition:.25s;z-index:99;box-shadow:0 8px 30px rgba(0,0,0,.45);
   }
   .toast.show{opacity:1;transform:translate(-50%,0)}
+  /* ---------- 更新提示条（App 内使用） ---------- */
+  .updbar{
+    position:fixed;left:0;right:0;top:0;z-index:200;
+    display:flex;align-items:center;gap:10px;
+    padding:calc(10px + env(safe-area-inset-top)) 14px 10px;
+    background:linear-gradient(120deg,#2b6ef5,#7c5cff);color:#fff;
+    transform:translateY(-110%);
+    transition:transform .3s cubic-bezier(.2,.8,.2,1);
+    box-shadow:0 6px 24px rgba(0,0,0,.45);
+  }
+  .updbar.show{transform:translateY(0)}
+  .upd-tx{flex:1;font-size:13.5px;font-weight:650;letter-spacing:.2px}
+  .upd-btn{
+    background:rgba(255,255,255,.22);border:none;color:#fff;
+    font-size:13px;font-weight:700;padding:7px 14px;border-radius:8px;
+    font-family:inherit;
+  }
+  .upd-btn:active{background:rgba(255,255,255,.35)}
+  .upd-x{background:none;border:none;color:rgba(255,255,255,.72);font-size:15px;padding:4px 6px}
+  /* ---------- App 内隐藏下载入口 ---------- */
+  html.in-app .dl,
+  html.in-app .dl-tip,
+  html.in-app #dlBottom,
+  html.in-app #mdBottom{display:none!important}
+  html.in-app #topBtn{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;border:none;
+  }
 </style>
 </head>
 <body>
@@ -591,7 +619,7 @@
 </section>
 
 <footer>
-  整理于 2026-10-23 · 供发电 2408 班备赛参考<br>
+  整理于 <span id="verDate">2026-10-23</span> · 供发电 2408 班备赛参考<br>
   视频链接均为公开页面，若失效可在 B 站按 BV 号或标题搜索<br>
   <span style="opacity:.6">本页可离线查看 · 视频需联网</span>
 </footer>
@@ -637,8 +665,9 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 1800);
   }
-  // App 内打开时（?app=1）隐藏下载入口，避免自己下载自己
-  if (/[?&]app=1/.test(location.search)) {
+  // App 内打开时隐藏下载入口（优先靠 html.in-app 类，兼容 ?app=1 直连调试）
+  if (/[?&]app=1/.test(location.search) || document.documentElement.classList.contains('in-app')) {
+    document.documentElement.classList.add('in-app');
     var dl = document.querySelector('.dl');
     var tip = document.querySelector('.dl-tip');
     var dlB = document.getElementById('dlBottom');
@@ -647,9 +676,29 @@
     if (tip) tip.remove();
     if (dlB) dlB.remove();
     if (mdB) mdB.remove();
-    var topB = document.getElementById('topBtn');
-    if (topB) topB.classList.add('primary');
   }
+
+  // 顶部「有新内容」提示条：由 App 检测到远端更新后调用
+  window.showUpdateBanner = function(){
+    if (document.getElementById('updBar')) return;
+    var bar = document.createElement('div');
+    bar.id = 'updBar';
+    bar.className = 'updbar';
+    bar.innerHTML =
+      '<span class="upd-tx">资料已更新到最新版</span>' +
+      '<button class="upd-btn" id="updBtn">立即刷新</button>' +
+      '<button class="upd-x" id="updX" aria-label="关闭">✕</button>';
+    document.body.appendChild(bar);
+    requestAnimationFrame(function(){ bar.classList.add('show'); });
+    document.getElementById('updBtn').onclick = function(){
+      if (window.ZGS && window.ZGS.reload) window.ZGS.reload();
+      else location.reload();
+    };
+    document.getElementById('updX').onclick = function(){
+      bar.classList.remove('show');
+      setTimeout(function(){ if (bar.parentNode) bar.remove(); }, 280);
+    };
+  };
 
   // 注册 service worker（仅 http/https 下有效，file:// 打开时静默跳过）
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
